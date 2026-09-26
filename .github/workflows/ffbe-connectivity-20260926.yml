@@ -10,27 +10,50 @@ jobs:
     runs-on: ubuntu-latest
     timeout-minutes: 3
     steps:
-      - name: Inspect public response headers
+      - name: Inspect bounded public GET responses
         shell: bash
         run: |
+          probe_tmp="$(mktemp -d)"
           probe() {
             label="$1"
             url="$2"
-            shift 2
-            printf '\n%s\n' "$label"
-            if curl --silent --show-error --head \
+            maximum="$3"
+            shift 3
+            body="$probe_tmp/$label.body"
+            headers="$probe_tmp/$label.headers"
+            metadata="$probe_tmp/$label.metadata"
+            : > "$body"
+            : > "$headers"
+            result=0
+            curl --silent --show-error --request GET \
               --proto '=https' --connect-timeout 5 --max-time 10 \
-              --write-out '\nhttp_status=%{http_code}\nremote_ip=%{remote_ip}\ntls_verify_result=%{ssl_verify_result}\ntotal_seconds=%{time_total}\n' \
-              "$@" "$url"; then
-              printf 'curl_exit=0\n'
-            else
-              result=$?
-              printf 'curl_exit=%s\n' "$result"
-            fi
+              --max-filesize "$maximum" --header 'Accept-Encoding: identity' \
+              --dump-header "$headers" --output "$body" \
+              --write-out 'http_status=%{http_code}\nremote_ip=%{remote_ip}\ntls_verify_result=%{ssl_verify_result}\ntotal_seconds=%{time_total}\n' \
+              "$@" "$url" > "$metadata" || result=$?
+            python3 - "$label" "$body" "$headers" "$metadata" "$result" <<'PY'
+          import hashlib, html, json, pathlib, re, sys
+          label, body_path, headers_path, metadata_path, status = sys.argv[1:]
+          body = pathlib.Path(body_path).read_bytes()
+          values = dict(line.split('=', 1) for line in pathlib.Path(metadata_path).read_text().splitlines() if '=' in line)
+          headers = {}
+          for line in pathlib.Path(headers_path).read_text(errors='replace').splitlines():
+              if ':' in line:
+                  key, value = line.split(':', 1)
+                  if key.lower() in ['content-type', 'content-length', 'content-range', 'server']:
+                      headers[key.lower()] = value.strip()
+          title = None
+          if 'html' in headers.get('content-type', '').lower():
+              match = re.search(r'<title[^>]*>(.*?)</title\s*>', body.decode('utf-8', errors='replace'), re.I | re.S)
+              if match:
+                  title = re.sub(r'\s+', ' ', html.unescape(re.sub(r'<[^>]*>', '', match.group(1)))).strip()[:120]
+                  title = ''.join(c for c in title if c.isprintable())
+          values.update(label=label, curl_exit=int(status), body_bytes=len(body), body_sha256=hashlib.sha256(body).hexdigest(), title=title, headers=headers)
+          print('FFBE_PUBLIC_GET_RESULT ' + json.dumps(values, ensure_ascii=True))
+          PY
           }
-          probe 'FFBE public homepage' 'https://ffbe.luminest.io/'
-          probe 'FFBE public downloads' 'https://ffbe.luminest.io/downloads/'
-          probe 'FFBE downloads at the known origin, with normal hostname and TLS verification' \
-            'https://ffbe.luminest.io/downloads/' \
+          probe 'ffbe_downloads_cdn' 'https://ffbe.luminest.io/downloads/' 1048576
+          probe 'ffbe_downloads_origin' 'https://ffbe.luminest.io/downloads/' 1048576 \
             --resolve 'ffbe.luminest.io:443:217.21.77.230'
-          probe 'Hostinger file-manager public root' 'https://srv635-files.hstgr.io/'
+          probe 'ffbe_existing_apk_range' 'https://ffbe.luminest.io/downloads/FFBE-Memorial-EN.apk' 64 \
+            --header 'Range: bytes=0-63'
