@@ -1,0 +1,36 @@
+name: FFBE public hosting connectivity
+
+on:
+  workflow_dispatch:
+
+permissions: {}
+
+jobs:
+  connectivity:
+    runs-on: ubuntu-latest
+    timeout-minutes: 3
+    steps:
+      - name: Inspect public response headers
+        shell: bash
+        run: |
+          probe() {
+            label="$1"
+            url="$2"
+            shift 2
+            printf '\n%s\n' "$label"
+            if curl --silent --show-error --head \
+              --proto '=https' --connect-timeout 5 --max-time 10 \
+              --write-out '\nhttp_status=%{http_code}\nremote_ip=%{remote_ip}\ntls_verify_result=%{ssl_verify_result}\ntotal_seconds=%{time_total}\n' \
+              "$@" "$url"; then
+              printf 'curl_exit=0\n'
+            else
+              result=$?
+              printf 'curl_exit=%s\n' "$result"
+            fi
+          }
+          probe 'FFBE public homepage' 'https://ffbe.luminest.io/'
+          probe 'FFBE public downloads' 'https://ffbe.luminest.io/downloads/'
+          probe 'FFBE downloads at the known origin, with normal hostname and TLS verification' \
+            'https://ffbe.luminest.io/downloads/' \
+            --resolve 'ffbe.luminest.io:443:217.21.77.230'
+          probe 'Hostinger file-manager public root' 'https://srv635-files.hstgr.io/'
