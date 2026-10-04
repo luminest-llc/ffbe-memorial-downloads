@@ -1,12 +1,18 @@
 {
   "channel": "beta",
   "package": "com.square_enix.ffbejpn",
-  "version": 204,
-  "versionCode": 204,
-  "asset_version": 203,
+  "version": 205,
+  "versionCode": 205,
+  "asset_version": 205,
   "apk_update_enabled": true,
-  "bytes": 145575080,
-  "sha256": "cfb96d5dd90625b56f2f8fe8c512be08b45186a2d4624f80f22658dc3b209385",
-  "apk_url": "https://ffbe.luminest.io/downloads/beta/releases/startup-fix-v204-cfb96d5dd90625b5/FFBE-Memorial-EN-Startup-Fix-v204.apk",
-  "note": "Build 204: production Patch 5 foundation, bundled startup assets, expanded events and GitHub native per-file downloads. Z Fold 8 / Android 17 retest pending."
+  "bytes": 145206221,
+  "sha256": "e5cd92390929216666cebdbb9055d1f216cf2001c20dc4f8fe63225101dbf039",
+  "apk_url": "https://ffbe.luminest.io/downloads/beta/releases/patch5-events-v205-e5cd923909292166/FFBE-Memorial-EN-Patch-5-Events-v205.apk",
+  "url": "https://ffbe.luminest.io/downloads/beta/releases/patch5-events-v205-e5cd923909292166/FFBE-Memorial-EN-Patch-5-Events-v205.apk",
+  "changelog": [
+    "Production Patch 5 plus 863 missing event books.",
+    "Original startup assets and downloader retained; required event assets download from GitHub.",
+    "Phone testing is pending."
+  ],
+  "note": "Build205: literal production Patch5 plus missing events and required GitHub event assets. Original startup files and downloader retained. Z Fold8 / Android17 phone test pending."
 }
