@@ -1,0 +1,13 @@
+{
+  "channel": "beta",
+  "version": 202,
+  "asset_version": 203,
+  "APK_staged_version": 203,
+  "apk_update_enabled": false,
+  "bytes": 44217260,
+  "sha256": "6591c1b4cb51c59c641873e6e542f3eff6833a8e85da14b6ead39dd492fdf20a",
+  "apk_url": "https://ffbe.luminest.io/downloads/beta/releases/patch6-thin-v202-048cdd8a9448f42d/FFBE-Memorial-EN-Patch-6-Thin-Round2-v202.apk",
+  "note": "Asset203 data is staged; corrected APK203 is not published. Preserve the last qualified public beta announcement until a separately reviewed APK publication.",
+  "package": "com.square_enix.ffbejpn",
+  "versionCode": 202
+}
