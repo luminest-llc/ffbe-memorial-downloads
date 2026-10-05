@@ -1,14 +1,26 @@
 {
   "channel": "beta",
   "package": "com.square_enix.ffbejpn",
-  "version": 207,
-  "versionCode": 207,
-  "asset_version": 206,
+  "version": 208,
+  "versionCode": 208,
+  "asset_version": 208,
   "apk_update_enabled": true,
   "bytes": 145206221,
-  "sha256": "d9181ffc05fa11e15f18102646734f33832b5d70793357ffa24a643ec8209f2e",
-  "apk_url": "https://github.com/luminest-llc/ffbe-memorial-downloads/releases/download/beta-apk-v207-d9181ffc05fa11e1/FFBE-Memorial-EN-Download-Spacing-v207.apk",
-  "url": "https://github.com/luminest-llc/ffbe-memorial-downloads/releases/download/beta-apk-v207-d9181ffc05fa11e1/FFBE-Memorial-EN-Download-Spacing-v207.apk",
-  "changelog": [],
-  "note": "Build207 removes the extra space after the wide comma on the native download screen. Existing build206 event content and assets are unchanged. Z Fold 8 / Android17 phone test pending."
+  "sha256": "9d21fc8b61c9900eaacb1c2ddef2cabcad1e97d2dc720be16ac09b06fc0086b4",
+  "url": "https://github.com/luminest-llc/ffbe-memorial-downloads/releases/download/production-v208-9d21fc8b61c9900e/FFBE-Memorial-EN-Global-Events-v208.apk",
+  "apk_url": "https://github.com/luminest-llc/ffbe-memorial-downloads/releases/download/production-v208-9d21fc8b61c9900e/FFBE-Memorial-EN-Global-Events-v208.apk",
+  "changelog": [
+    "added all the global story events and event battles.",
+    "Overdrive skills crash the game.",
+    "dark visions crash the game"
+  ],
+  "known_issues": [
+    "Overdrive skills crash the game.",
+    "dark visions crash the game"
+  ],
+  "released": "2026-10-04",
+  "content_manifest_url": "https://github.com/luminest-llc/ffbe-memorial-downloads/releases/download/content-20260929/content-manifest-v5-r2.json",
+  "base_manifest_url": "https://github.com/luminest-llc/ffbe-memorial-downloads/releases/download/content-v1/base-manifest-v1.json",
+  "event_manifest_url": "https://github.com/luminest-llc/ffbe-memorial-downloads/releases/download/production-v208-9d21fc8b61c9900e/event-assets.json",
+  "content_catalog_url": "https://github.com/luminest-llc/ffbe-memorial-downloads/releases/download/production-v208-9d21fc8b61c9900e/content_delivery.tsv"
 }
