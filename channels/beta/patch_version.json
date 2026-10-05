@@ -1,14 +1,14 @@
 {
   "channel": "beta",
   "package": "com.square_enix.ffbejpn",
-  "version": 206,
-  "versionCode": 206,
+  "version": 207,
+  "versionCode": 207,
   "asset_version": 206,
   "apk_update_enabled": true,
   "bytes": 145206221,
-  "sha256": "345967a814abb6ab645f280dd3c2b0195c5f395dd3e18e1227ef78515e5bb00d",
-  "apk_url": "https://ffbe.luminest.io/downloads/beta/releases/event-cleanup-v206-345967a814abb6ab/FFBE-Memorial-EN-Event-Cleanup-v206.apk",
-  "url": "https://ffbe.luminest.io/downloads/beta/releases/event-cleanup-v206-345967a814abb6ab/FFBE-Memorial-EN-Event-Cleanup-v206.apk",
+  "sha256": "d9181ffc05fa11e15f18102646734f33832b5d70793357ffa24a643ec8209f2e",
+  "apk_url": "https://ffbe.luminest.io/downloads/beta/releases/download-spacing-v207-d9181ffc05fa11e1/FFBE-Memorial-EN-Download-Spacing-v207.apk",
+  "url": "https://ffbe.luminest.io/downloads/beta/releases/download-spacing-v207-d9181ffc05fa11e1/FFBE-Memorial-EN-Download-Spacing-v207.apk",
   "changelog": [],
-  "note": "Build 206: reviewed event menu cleanup and requested event banners. Existing startup, downloader, native libraries, units and movie behavior retained. Z Fold 8 / Android 17 phone test pending."
+  "note": "Build207 removes the extra space after the wide comma on the native download screen. Existing build206 event content and assets are unchanged. Z Fold 8 / Android17 phone test pending."
 }
